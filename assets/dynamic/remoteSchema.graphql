@@ -182,6 +182,7 @@ type PageGeneric implements Entry {
     contentfulMetadata: ContentfulMetadata!
     linkedFrom(allowedLocales: [String]): PageGenericLinkingCollections
     sectionsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageGenericSectionsCollection
+    slug(locale: String): String
     sys: Sys!
     title(locale: String): String
 }
@@ -226,6 +227,7 @@ type Query {
 
 "[See type definition](https://app.contentful.com/spaces/3kkzcrwm5yh9/content_types/sectionGeneric)"
 type SectionGeneric implements Entry {
+    background(locale: String): String
     containerWidth(locale: String): String
     contentCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): SectionGenericContentCollection
     contentfulMetadata: ContentfulMetadata!
@@ -463,6 +465,8 @@ enum LayoutGridOrder {
 }
 
 enum PageGenericOrder {
+    slug_ASC
+    slug_DESC
     sys_firstPublishedAt_ASC
     sys_firstPublishedAt_DESC
     sys_id_ASC
@@ -476,6 +480,8 @@ enum PageGenericOrder {
 }
 
 enum SectionGenericOrder {
+    background_ASC
+    background_DESC
     containerWidth_ASC
     containerWidth_DESC
     sys_firstPublishedAt_ASC
@@ -722,6 +728,13 @@ input PageGenericFilter {
     OR: [PageGenericFilter]
     contentfulMetadata: ContentfulMetadataFilter
     sectionsCollection_exists: Boolean
+    slug: String
+    slug_contains: String
+    slug_exists: Boolean
+    slug_in: [String]
+    slug_not: String
+    slug_not_contains: String
+    slug_not_in: [String]
     sys: SysFilter
     title: String
     title_contains: String
@@ -735,6 +748,13 @@ input PageGenericFilter {
 input SectionGenericFilter {
     AND: [SectionGenericFilter]
     OR: [SectionGenericFilter]
+    background: String
+    background_contains: String
+    background_exists: Boolean
+    background_in: [String]
+    background_not: String
+    background_not_contains: String
+    background_not_in: [String]
     containerWidth: String
     containerWidth_contains: String
     containerWidth_exists: Boolean

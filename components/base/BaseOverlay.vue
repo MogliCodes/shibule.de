@@ -19,7 +19,6 @@ const target = ref(null);
 
 const isVisible = ref(true);
 onClickOutside(target, (e) => {
-  console.log(e, isVisible.value);
   isVisible.value = !isVisible.value;
 });
 </script>

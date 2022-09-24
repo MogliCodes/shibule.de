@@ -1,24 +1,27 @@
 <template>
-  <div class="container-base" :class="{
-    'container-standard': props.containerWidth === 'standard',
-    'container-extended': props.containerWidth === 'extended',
-    'container-full': props.containerWidth === 'full',
-    'mx-auto': props.isCentered
-  }">
+  <div
+    class="container-base"
+    :class="{
+      'container-standard': props.containerWidth === 'standard',
+      'container-extended': props.containerWidth === 'extended',
+      'container-full': props.containerWidth === 'full',
+      'mx-auto': props.isCentered,
+    }"
+  >
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  containerWidth?: 'standard' | 'extended' | 'full'
-  isCentered?: boolean
+  containerWidth?: "standard" | "extended" | "full";
+  isCentered?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isCentered: true,
-  containerWidth: 'standard'
-})
+  containerWidth: "standard",
+});
 </script>
 
 <style>
@@ -29,5 +32,4 @@ const props = withDefaults(defineProps<Props>(), {
 .container-extended {
   max-width: 1560px;
 }
-
 </style>

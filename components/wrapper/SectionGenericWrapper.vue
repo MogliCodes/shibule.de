@@ -1,16 +1,19 @@
 <template>
   <BaseContainer container-width="standard">
     <h1>SectionGenericWrapper</h1>
-    <WrapperDynamicContentfulElements :is-section="false" :sections="props.contentCollection.items" />
+    <WrapperDynamicContentfulElements
+      :is-section="false"
+      :sections="props?.contentCollection?.items"
+    />
   </BaseContainer>
 </template>
 
 <script setup lang="ts">
-import BaseContainer from "~/components/base/BaseContainer.vue"
+import BaseContainer from "~/components/base/BaseContainer.vue";
 
 interface Props {
-  contentCollection: {}
+  contentCollection: Array<unknown>;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 </script>
