@@ -23,4 +23,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  css: ["@/assets/fonts/fonts.css"],
+  app: {
+    head: {
+      title: "Shibulé",
+      link: [{ rel: "icon", href: "img/shibule_logo.svg" }],
+    },
+  },
 });
