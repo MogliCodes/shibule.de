@@ -1,0 +1,16 @@
+{
+  "name": "Contentful Beards Test",
+  "schemaPath": "assets/dynamic/remoteSchema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Remote GraphQL Endpoint": {
+        "url": "${env:CONTENTFUL_BASE_URL}/spaces/${env:CONTENTFUL_SPACE_ID}/environments/${env:CONTENTFUL_ENVIRONMENT}",
+        "headers": {
+          "user-agent": "JS GraphQL",
+          "authorization": "Bearer ${env:CONTENTFUL_API_KEY}"
+        },
+        "introspect": true
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+query layoutGridById($id: String!) {
+    layoutGrid(id: $id) {
+        title
+        columns
+        elementsCollection {
+            items {
+                __typename
+                ... on ElementColumn {
+                    elementsCollection {
+                        items {
+                            __typename
+                            title
+                            text {
+                                json
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,817 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+interface Entry {
+    contentfulMetadata: ContentfulMetadata!
+    sys: Sys!
+}
+
+union PageGenericSectionsItem = SectionGeneric | SectionHero
+
+"Represents a binary file in a space. An asset can be any file type."
+type Asset {
+    contentType(locale: String): String
+    contentfulMetadata: ContentfulMetadata!
+    description(locale: String): String
+    fileName(locale: String): String
+    height(locale: String): Int
+    linkedFrom(allowedLocales: [String]): AssetLinkingCollections
+    size(locale: String): Int
+    sys: Sys!
+    title(locale: String): String
+    url(locale: String, transform: ImageTransformOptions): String
+    width(locale: String): Int
+}
+
+type AssetCollection {
+    items: [Asset]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type AssetLinkingCollections {
+    elementImageCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ElementImageCollection
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+    sectionHeroCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): SectionHeroCollection
+}
+
+type ContentfulMetadata {
+    tags: [ContentfulTag]!
+}
+
+"""
+
+Represents a tag entity for finding and organizing content easily.
+Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-tags
+"""
+type ContentfulTag {
+    id: String
+    name: String
+}
+
+"[See type definition](https://app.contentful.com/spaces/3kkzcrwm5yh9/content_types/elementColumn)"
+type ElementColumn implements Entry {
+    contentfulMetadata: ContentfulMetadata!
+    elementsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ElementColumnElementsCollection
+    linkedFrom(allowedLocales: [String]): ElementColumnLinkingCollections
+    sys: Sys!
+    title(locale: String): String
+}
+
+type ElementColumnCollection {
+    items: [ElementColumn]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type ElementColumnElementsCollection {
+    items: [ElementText]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type ElementColumnLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+"[See type definition](https://app.contentful.com/spaces/3kkzcrwm5yh9/content_types/elementImage)"
+type ElementImage implements Entry {
+    contentfulMetadata: ContentfulMetadata!
+    image(locale: String, preview: Boolean): Asset
+    linkedFrom(allowedLocales: [String]): ElementImageLinkingCollections
+    sys: Sys!
+    title(locale: String): String
+}
+
+type ElementImageCollection {
+    items: [ElementImage]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type ElementImageLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+"[See type definition](https://app.contentful.com/spaces/3kkzcrwm5yh9/content_types/elementText)"
+type ElementText implements Entry {
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): ElementTextLinkingCollections
+    sys: Sys!
+    text(locale: String): ElementTextText
+    title(locale: String): String
+}
+
+type ElementTextCollection {
+    items: [ElementText]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type ElementTextLinkingCollections {
+    elementColumnCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ElementColumnCollection
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+type ElementTextText {
+    json: JSON!
+    links: ElementTextTextLinks!
+}
+
+type ElementTextTextAssets {
+    block: [Asset]!
+    hyperlink: [Asset]!
+}
+
+type ElementTextTextEntries {
+    block: [Entry]!
+    hyperlink: [Entry]!
+    inline: [Entry]!
+}
+
+type ElementTextTextLinks {
+    assets: ElementTextTextAssets!
+    entries: ElementTextTextEntries!
+}
+
+type EntryCollection {
+    items: [Entry]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+"[See type definition](https://app.contentful.com/spaces/3kkzcrwm5yh9/content_types/layoutGrid)"
+type LayoutGrid implements Entry {
+    columns(locale: String): Int
+    contentfulMetadata: ContentfulMetadata!
+    elementsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): LayoutGridElementsCollection
+    linkedFrom(allowedLocales: [String]): LayoutGridLinkingCollections
+    sys: Sys!
+    title(locale: String): String
+}
+
+type LayoutGridCollection {
+    items: [LayoutGrid]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type LayoutGridElementsCollection {
+    items: [Entry]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type LayoutGridLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+"[See type definition](https://app.contentful.com/spaces/3kkzcrwm5yh9/content_types/pageGeneric)"
+type PageGeneric implements Entry {
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): PageGenericLinkingCollections
+    sectionsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageGenericSectionsCollection
+    sys: Sys!
+    title(locale: String): String
+}
+
+type PageGenericCollection {
+    items: [PageGeneric]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type PageGenericLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+type PageGenericSectionsCollection {
+    items: [PageGenericSectionsItem]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type Query {
+    asset(id: String!, locale: String, preview: Boolean): Asset
+    assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
+    elementColumn(id: String!, locale: String, preview: Boolean): ElementColumn
+    elementColumnCollection(limit: Int = 100, locale: String, order: [ElementColumnOrder], preview: Boolean, skip: Int = 0, where: ElementColumnFilter): ElementColumnCollection
+    elementImage(id: String!, locale: String, preview: Boolean): ElementImage
+    elementImageCollection(limit: Int = 100, locale: String, order: [ElementImageOrder], preview: Boolean, skip: Int = 0, where: ElementImageFilter): ElementImageCollection
+    elementText(id: String!, locale: String, preview: Boolean): ElementText
+    elementTextCollection(limit: Int = 100, locale: String, order: [ElementTextOrder], preview: Boolean, skip: Int = 0, where: ElementTextFilter): ElementTextCollection
+    entryCollection(limit: Int = 100, locale: String, order: [EntryOrder], preview: Boolean, skip: Int = 0, where: EntryFilter): EntryCollection
+    layoutGrid(id: String!, locale: String, preview: Boolean): LayoutGrid
+    layoutGridCollection(limit: Int = 100, locale: String, order: [LayoutGridOrder], preview: Boolean, skip: Int = 0, where: LayoutGridFilter): LayoutGridCollection
+    pageGeneric(id: String!, locale: String, preview: Boolean): PageGeneric
+    pageGenericCollection(limit: Int = 100, locale: String, order: [PageGenericOrder], preview: Boolean, skip: Int = 0, where: PageGenericFilter): PageGenericCollection
+    sectionGeneric(id: String!, locale: String, preview: Boolean): SectionGeneric
+    sectionGenericCollection(limit: Int = 100, locale: String, order: [SectionGenericOrder], preview: Boolean, skip: Int = 0, where: SectionGenericFilter): SectionGenericCollection
+    sectionHero(id: String!, locale: String, preview: Boolean): SectionHero
+    sectionHeroCollection(limit: Int = 100, locale: String, order: [SectionHeroOrder], preview: Boolean, skip: Int = 0, where: SectionHeroFilter): SectionHeroCollection
+}
+
+"[See type definition](https://app.contentful.com/spaces/3kkzcrwm5yh9/content_types/sectionGeneric)"
+type SectionGeneric implements Entry {
+    containerWidth(locale: String): String
+    contentCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): SectionGenericContentCollection
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): SectionGenericLinkingCollections
+    sys: Sys!
+    title(locale: String): String
+}
+
+type SectionGenericCollection {
+    items: [SectionGeneric]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type SectionGenericContentCollection {
+    items: [Entry]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type SectionGenericLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+    pageGenericCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageGenericCollection
+}
+
+"[See type definition](https://app.contentful.com/spaces/3kkzcrwm5yh9/content_types/sectionHero)"
+type SectionHero implements Entry {
+    backgroundImage(locale: String, preview: Boolean): Asset
+    contentfulMetadata: ContentfulMetadata!
+    headline(locale: String): String
+    linkedFrom(allowedLocales: [String]): SectionHeroLinkingCollections
+    sys: Sys!
+    text(locale: String): SectionHeroText
+    title(locale: String): String
+}
+
+type SectionHeroCollection {
+    items: [SectionHero]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type SectionHeroLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+    pageGenericCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageGenericCollection
+}
+
+type SectionHeroText {
+    json: JSON!
+    links: SectionHeroTextLinks!
+}
+
+type SectionHeroTextAssets {
+    block: [Asset]!
+    hyperlink: [Asset]!
+}
+
+type SectionHeroTextEntries {
+    block: [Entry]!
+    hyperlink: [Entry]!
+    inline: [Entry]!
+}
+
+type SectionHeroTextLinks {
+    assets: SectionHeroTextAssets!
+    entries: SectionHeroTextEntries!
+}
+
+type Sys {
+    environmentId: String!
+    firstPublishedAt: DateTime
+    id: String!
+    publishedAt: DateTime
+    publishedVersion: Int
+    spaceId: String!
+}
+
+enum AssetOrder {
+    contentType_ASC
+    contentType_DESC
+    fileName_ASC
+    fileName_DESC
+    height_ASC
+    height_DESC
+    size_ASC
+    size_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    url_ASC
+    url_DESC
+    width_ASC
+    width_DESC
+}
+
+enum ElementColumnOrder {
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
+}
+
+enum ElementImageOrder {
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
+}
+
+enum ElementTextOrder {
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
+}
+
+enum EntryOrder {
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+}
+
+enum ImageFormat {
+    AVIF
+    "JPG image format."
+    JPG
+    """
+
+    Progressive JPG format stores multiple passes of an image in progressively higher detail.
+    When a progressive image is loading, the viewer will first see a lower quality pixelated version which
+    will gradually improve in detail, until the image is fully downloaded. This is to display an image as
+    early as possible to make the layout look as designed.
+    """
+    JPG_PROGRESSIVE
+    "PNG image format"
+    PNG
+    """
+
+    8-bit PNG images support up to 256 colors and weigh less than the standard 24-bit PNG equivalent.
+    The 8-bit PNG format is mostly used for simple images, such as icons or logos.
+    """
+    PNG8
+    "WebP image format."
+    WEBP
+}
+
+enum ImageResizeFocus {
+    "Focus the resizing on the bottom."
+    BOTTOM
+    "Focus the resizing on the bottom left."
+    BOTTOM_LEFT
+    "Focus the resizing on the bottom right."
+    BOTTOM_RIGHT
+    "Focus the resizing on the center."
+    CENTER
+    "Focus the resizing on the largest face."
+    FACE
+    "Focus the resizing on the area containing all the faces."
+    FACES
+    "Focus the resizing on the left."
+    LEFT
+    "Focus the resizing on the right."
+    RIGHT
+    "Focus the resizing on the top."
+    TOP
+    "Focus the resizing on the top left."
+    TOP_LEFT
+    "Focus the resizing on the top right."
+    TOP_RIGHT
+}
+
+enum ImageResizeStrategy {
+    "Crops a part of the original image to fit into the specified dimensions."
+    CROP
+    "Resizes the image to the specified dimensions, cropping the image if needed."
+    FILL
+    "Resizes the image to fit into the specified dimensions."
+    FIT
+    """
+
+    Resizes the image to the specified dimensions, padding the image if needed.
+    Uses desired background color as padding color.
+    """
+    PAD
+    "Resizes the image to the specified dimensions, changing the original aspect ratio if needed."
+    SCALE
+    "Creates a thumbnail from the image."
+    THUMB
+}
+
+enum LayoutGridOrder {
+    columns_ASC
+    columns_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
+}
+
+enum PageGenericOrder {
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
+}
+
+enum SectionGenericOrder {
+    containerWidth_ASC
+    containerWidth_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
+}
+
+enum SectionHeroOrder {
+    headline_ASC
+    headline_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
+}
+
+"""
+
+A date-time string at UTC, such as 2007-12-03T10:15:30Z,
+compliant with the 'date-time' format outlined in section 5.6 of
+the RFC 3339 profile of the ISO 8601 standard for representation
+of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"The 'Dimension' type represents dimensions as whole numeric values between `1` and `4000`."
+scalar Dimension
+
+"The 'HexColor' type represents color in `rgb:ffffff` string format."
+scalar HexColor
+
+"The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."
+scalar JSON
+
+"The 'Quality' type represents quality as whole numeric values between `1` and `100`."
+scalar Quality
+
+input AssetFilter {
+    AND: [AssetFilter]
+    OR: [AssetFilter]
+    contentType: String
+    contentType_contains: String
+    contentType_exists: Boolean
+    contentType_in: [String]
+    contentType_not: String
+    contentType_not_contains: String
+    contentType_not_in: [String]
+    contentfulMetadata: ContentfulMetadataFilter
+    description: String
+    description_contains: String
+    description_exists: Boolean
+    description_in: [String]
+    description_not: String
+    description_not_contains: String
+    description_not_in: [String]
+    fileName: String
+    fileName_contains: String
+    fileName_exists: Boolean
+    fileName_in: [String]
+    fileName_not: String
+    fileName_not_contains: String
+    fileName_not_in: [String]
+    height: Int
+    height_exists: Boolean
+    height_gt: Int
+    height_gte: Int
+    height_in: [Int]
+    height_lt: Int
+    height_lte: Int
+    height_not: Int
+    height_not_in: [Int]
+    size: Int
+    size_exists: Boolean
+    size_gt: Int
+    size_gte: Int
+    size_in: [Int]
+    size_lt: Int
+    size_lte: Int
+    size_not: Int
+    size_not_in: [Int]
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+    url: String
+    url_contains: String
+    url_exists: Boolean
+    url_in: [String]
+    url_not: String
+    url_not_contains: String
+    url_not_in: [String]
+    width: Int
+    width_exists: Boolean
+    width_gt: Int
+    width_gte: Int
+    width_in: [Int]
+    width_lt: Int
+    width_lte: Int
+    width_not: Int
+    width_not_in: [Int]
+}
+
+input ContentfulMetadataFilter {
+    tags: ContentfulMetadataTagsFilter
+    tags_exists: Boolean
+}
+
+input ContentfulMetadataTagsFilter {
+    id_contains_all: [String]
+    id_contains_none: [String]
+    id_contains_some: [String]
+}
+
+input ElementColumnFilter {
+    AND: [ElementColumnFilter]
+    OR: [ElementColumnFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    elementsCollection_exists: Boolean
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+}
+
+input ElementImageFilter {
+    AND: [ElementImageFilter]
+    OR: [ElementImageFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    image_exists: Boolean
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+}
+
+input ElementTextFilter {
+    AND: [ElementTextFilter]
+    OR: [ElementTextFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    sys: SysFilter
+    text_contains: String
+    text_exists: Boolean
+    text_not_contains: String
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+}
+
+input EntryFilter {
+    AND: [EntryFilter]
+    OR: [EntryFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    sys: SysFilter
+}
+
+input ImageTransformOptions {
+    """
+
+    Desired background color, used with corner radius or `PAD` resize strategy.
+    Defaults to transparent (for `PNG`, `PNG8` and `WEBP`) or white (for `JPG` and `JPG_PROGRESSIVE`).
+    """
+    backgroundColor: HexColor
+    """
+
+    Desired corner radius in pixels.
+    Results in an image with rounded corners (pass `-1` for a full circle/ellipse).
+    Defaults to `0`. Uses desired background color as padding color,
+    unless the format is `JPG` or `JPG_PROGRESSIVE` and resize strategy is `PAD`, then defaults to white.
+    """
+    cornerRadius: Int
+    "Desired image format. Defaults to the original image format."
+    format: ImageFormat
+    "Desired height in pixels. Defaults to the original image height."
+    height: Dimension
+    """
+
+    Desired quality of the image in percents.
+    Used for `PNG8`, `JPG`, `JPG_PROGRESSIVE` and `WEBP` formats.
+    """
+    quality: Quality
+    "Desired resize focus area. Defaults to `CENTER`."
+    resizeFocus: ImageResizeFocus
+    "Desired resize strategy. Defaults to `FIT`."
+    resizeStrategy: ImageResizeStrategy
+    "Desired width in pixels. Defaults to the original image width."
+    width: Dimension
+}
+
+input LayoutGridFilter {
+    AND: [LayoutGridFilter]
+    OR: [LayoutGridFilter]
+    columns: Int
+    columns_exists: Boolean
+    columns_gt: Int
+    columns_gte: Int
+    columns_in: [Int]
+    columns_lt: Int
+    columns_lte: Int
+    columns_not: Int
+    columns_not_in: [Int]
+    contentfulMetadata: ContentfulMetadataFilter
+    elementsCollection_exists: Boolean
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+}
+
+input PageGenericFilter {
+    AND: [PageGenericFilter]
+    OR: [PageGenericFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    sectionsCollection_exists: Boolean
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+}
+
+input SectionGenericFilter {
+    AND: [SectionGenericFilter]
+    OR: [SectionGenericFilter]
+    containerWidth: String
+    containerWidth_contains: String
+    containerWidth_exists: Boolean
+    containerWidth_in: [String]
+    containerWidth_not: String
+    containerWidth_not_contains: String
+    containerWidth_not_in: [String]
+    contentCollection_exists: Boolean
+    contentfulMetadata: ContentfulMetadataFilter
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+}
+
+input SectionHeroFilter {
+    AND: [SectionHeroFilter]
+    OR: [SectionHeroFilter]
+    backgroundImage_exists: Boolean
+    contentfulMetadata: ContentfulMetadataFilter
+    headline: String
+    headline_contains: String
+    headline_exists: Boolean
+    headline_in: [String]
+    headline_not: String
+    headline_not_contains: String
+    headline_not_in: [String]
+    sys: SysFilter
+    text_contains: String
+    text_exists: Boolean
+    text_not_contains: String
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+}
+
+input SysFilter {
+    firstPublishedAt: DateTime
+    firstPublishedAt_exists: Boolean
+    firstPublishedAt_gt: DateTime
+    firstPublishedAt_gte: DateTime
+    firstPublishedAt_in: [DateTime]
+    firstPublishedAt_lt: DateTime
+    firstPublishedAt_lte: DateTime
+    firstPublishedAt_not: DateTime
+    firstPublishedAt_not_in: [DateTime]
+    id: String
+    id_contains: String
+    id_exists: Boolean
+    id_in: [String]
+    id_not: String
+    id_not_contains: String
+    id_not_in: [String]
+    publishedAt: DateTime
+    publishedAt_exists: Boolean
+    publishedAt_gt: DateTime
+    publishedAt_gte: DateTime
+    publishedAt_in: [DateTime]
+    publishedAt_lt: DateTime
+    publishedAt_lte: DateTime
+    publishedAt_not: DateTime
+    publishedAt_not_in: [DateTime]
+    publishedVersion: Float
+    publishedVersion_exists: Boolean
+    publishedVersion_gt: Float
+    publishedVersion_gte: Float
+    publishedVersion_in: [Float]
+    publishedVersion_lt: Float
+    publishedVersion_lte: Float
+    publishedVersion_not: Float
+    publishedVersion_not_in: [Float]
+}

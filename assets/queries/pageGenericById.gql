@@ -1,0 +1,40 @@
+query pageGenericById($id: String!) {
+    pageGeneric(id: $id) {
+        sys {
+            id
+        }
+        title
+        sectionsCollection {
+            items {
+                __typename
+                ... on SectionHero {
+                    __typename
+                    headline
+                    text {json}
+                    backgroundImage {
+                        sys {
+                            id
+                        }
+                    }
+                }
+                ... on SectionGeneric {
+                    __typename
+                    title
+                    contentCollection {
+                        items {
+                            ... on Entry {
+                                sys { id}
+                                __typename
+                            }
+                            ... on LayoutGrid {
+                                title
+
+                            }
+                        }
+                    }
+                    containerWidth
+                }
+            }
+        }
+    }
+}
