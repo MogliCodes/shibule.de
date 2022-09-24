@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-80 flex items-center">
     <BaseContainer>
-      <h1 class="text-5xl text-center font-bold mb-4">
+      <h1 class="text-5xl lg:text-9xl font-display font-black text-center mb-8">
         {{ heroData.headline }}
       </h1>
       <BaseRichTextRenderer
