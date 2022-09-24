@@ -10,6 +10,7 @@
     "lint:fix": "yarn run lint --fix"
   },
   "devDependencies": {
+    "@nuxtjs/eslint-config-typescript": "^11.0.0",
     "@typescript-eslint/eslint-plugin": "5.33.0",
     "@typescript-eslint/parser": "5.33.0",
     "@vue/eslint-config-typescript": "^11.0.0",

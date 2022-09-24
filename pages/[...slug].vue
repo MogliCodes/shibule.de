@@ -1,14 +1,21 @@
 <template>
-  <main v-if="pageData">
-    <WrapperDynamicContentfulElements :sections="sections" />
-  </main>
-  <BaseOverlay />
+  <div>
+    <main v-if="pageData && sections">
+      <WrapperDynamicContentfulElements :sections="sections" />
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts">
+const route = useRoute();
+const slug = route.path;
+const slugFormatted = slug.substring(1) || "home";
+
 const { data: pageData } = await useAsyncGql({
-  operation: "pageGenericById",
-  variables: { id: "4TuN4sAi9fJX2iJ7Lj6qIJ" },
+  operation: "pageGenericBySlug",
+  variables: { slug: slugFormatted, preview: false },
 });
-const sections = pageData?.value?.pageGeneric?.sectionsCollection.items;
+
+const sections =
+  pageData?.value?.pageGenericCollection?.items[0]?.sectionsCollection?.items;
 </script>

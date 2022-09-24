@@ -1,0 +1,19 @@
+query heroByEntryId($id: String!, $preview: Boolean, $locale: String = "en-US") {
+    sectionHero(id: $id, preview: $preview, locale: $locale) {
+        sys {
+            id
+        }
+        title
+        headline
+        text {
+            json
+        }
+        backgroundImage {
+            title
+            sys {
+                id
+            }
+            url
+        }
+    }
+}

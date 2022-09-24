@@ -1,5 +1,9 @@
 import { defineNuxtConfig } from "nuxt";
 export default defineNuxtConfig({
+  router: {
+    base: "/home",
+  },
+  target: "static",
   modules: ["nuxt-graphql-client", "@nuxtjs/tailwindcss", "@vueuse/nuxt"],
   build: {
     transpile:

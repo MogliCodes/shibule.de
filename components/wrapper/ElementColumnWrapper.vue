@@ -1,18 +1,19 @@
 <template>
   <div>
     <h3>ElementColumn</h3>
-    <WrapperDynamicContentfulElements :sections="elements" :is-section="false" />
+    <WrapperDynamicContentfulElements
+      :sections="elements"
+      :is-section="false"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-
 interface Props {
-  elementsCollection: {}
+  elementsCollection: Array<unknown>;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
-const elements = props.elementsCollection.items
-
+const elements = ref(props.elementsCollection.items);
 </script>

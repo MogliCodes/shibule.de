@@ -1,14 +1,14 @@
 <template>
-  <h4>ElementTextWrapper</h4>
-  <BaseRichTextRenderer :document="props.text" />
+  <div v-if="props.text">
+    <h4>ElementTextWrapper</h4>
+    <BaseRichTextRenderer :document="props?.text" />
+  </div>
 </template>
 
 <script setup lang="ts">
-
 interface Props {
-  text?: { json: Record<string, unknown> }
+  text?: { json: Record<string, unknown> };
 }
 
-const props = defineProps<Props>()
-
+const props = defineProps<Props>();
 </script>

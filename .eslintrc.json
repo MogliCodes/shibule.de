@@ -5,18 +5,13 @@
     "node": true
   },
   "extends": [
+    "@nuxtjs/eslint-config-typescript",
     "plugin:vue/vue3-strongly-recommended",
     "eslint:recommended",
     "@vue/typescript/recommended",
     "plugin:cypress/recommended",
     "plugin:prettier/recommended"
   ],
-  "parser": "vue-eslint-parser",
-  "parserOptions": {
-    "parser": "espree", // <-
-    "ecmaVersion": 2022, // <-
-    "sourceType": "module"
-  },
   "rules": {
     "no-undef": "off",
     "vue/multi-word-component-names": ["error", {

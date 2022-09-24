@@ -5,33 +5,33 @@
 </template>
 
 <script setup lang="ts">
-import { ConcreteComponent } from 'vue'
+import { ConcreteComponent } from "vue";
 
 const props = defineProps<{
-  entryId: string | undefined
-}>()
+  entryId: string | undefined;
+}>();
 
-const componentBindingsData = ref({})
+const componentBindingsData = ref({});
 
-let metaLink: MetaLink | null
-let styledText: StyledText | null
+let metaLink: MetaLink | null;
+let styledText: StyledText | null;
 if (props.entryId) {
   const { data: fragmentData } =
-      await useFetchFragmentData<RichTextEmbeddedEntries>(
-          props.entryId,
-          GqlRichTextEmbeddedEntries,
-          Date.now().toString(36) + Math.random().toString(36).substr(2)
-      )
-  metaLink = fragmentData?.value.metaLink
-  styledText = fragmentData?.value.fragmentStyledText
-  componentBindingsData.value = componentBindings()
+    await useFetchFragmentData<RichTextEmbeddedEntries>(
+      props.entryId,
+      GqlRichTextEmbeddedEntries,
+      Date.now().toString(36) + Math.random().toString(36).substr(2)
+    );
+  metaLink = fragmentData?.value.metaLink;
+  styledText = fragmentData?.value.fragmentStyledText;
+  componentBindingsData.value = componentBindings();
 }
 
 function isButton() {
   return (
-      metaLink?.style === 'button-primary' ||
-      metaLink?.style === 'button-secondary'
-  )
+    metaLink?.style === "button-primary" ||
+    metaLink?.style === "button-secondary"
+  );
 }
 function getComponentProps() {
   return {
@@ -40,21 +40,21 @@ function getComponentProps() {
     text: metaLink?.text,
     icon: metaLink?.icon,
     showArrow: metaLink?.showArrow || false,
-    target: metaLink?.openInNewTab ? '_blank' : '_self',
+    target: metaLink?.openInNewTab ? "_blank" : "_self",
     linkStyle: metaLink?.style,
-  }
+  };
 }
 function getLink() {
-  return getUrlFromEntryData(metaLink)
+  return getUrlFromEntryData(metaLink);
 }
 function getCurrentContentType() {
-  if (styledText) return resolveComponent('WrapperBegaStyledTextWrapper')
-  return 'span'
+  if (styledText) return resolveComponent("WrapperBegaStyledTextWrapper");
+  return "span";
 }
 
 function componentBindings() {
   if (metaLink) {
-    return getComponentProps()
+    return getComponentProps();
   }
   if (styledText) {
     return {
@@ -64,17 +64,17 @@ function componentBindings() {
       textSize: styledText.textSize,
       textTransform: styledText.textTransform,
       isEmbedded: true,
-    }
+    };
   }
-  return {}
+  return {};
 }
 /**
  * Determine the required component based on the given link type
  */
 function getType(): ConcreteComponent | string {
   if (metaLink.internalLink?.slug) {
-    return resolveComponent('nuxt-link')
+    return resolveComponent("nuxt-link");
   }
-  return 'a'
+  return "a";
 }
 </script>

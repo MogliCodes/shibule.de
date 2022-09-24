@@ -5,11 +5,9 @@
 </template>
 
 <script setup lang="ts">
-
 interface Props {
-  columns: number
+  columns: number;
 }
 
-const props = defineProps<Props>()
-
+const props = defineProps<Props>();
 </script>
