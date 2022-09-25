@@ -16,6 +16,13 @@ query layoutGridById($id: String!) {
                         }
                     }
                 }
+                ...on ElementText {
+                    __typename
+                    text {
+                        json
+                    }
+                }
+                ...elementImage
             }
         }
     }

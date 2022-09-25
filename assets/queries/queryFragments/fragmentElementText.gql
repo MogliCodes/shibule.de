@@ -1,0 +1,6 @@
+fragment elementText on ElementText {
+    __typename
+    text {
+        json
+    }
+}

@@ -1,6 +1,5 @@
 <template>
   <div v-if="props.text">
-    <h4>ElementTextWrapper</h4>
     <BaseRichTextRenderer :document="props?.text" />
   </div>
 </template>

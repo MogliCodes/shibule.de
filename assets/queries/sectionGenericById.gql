@@ -1,0 +1,17 @@
+query sectionGenericById ($id: String!, $preview: Boolean, $locale: String = "en-US") {
+    sectionGeneric(id: $id, preview: $preview, locale: $locale) {
+        sys {
+            id
+        }
+        title
+        background
+        contentCollection {
+            items {
+                ...genericEntry
+                ...elementImage
+                ...layoutGrid
+                ...elementVideo
+            }
+        }
+    }
+}

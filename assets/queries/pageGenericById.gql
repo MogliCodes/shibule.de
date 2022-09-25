@@ -7,33 +7,8 @@ query pageGenericById($id: String!) {
         sectionsCollection {
             items {
                 __typename
-                ... on SectionHero {
-                    __typename
-                    headline
-                    text {json}
-                    backgroundImage {
-                        sys {
-                            id
-                        }
-                    }
-                }
-                ... on SectionGeneric {
-                    __typename
-                    title
-                    contentCollection {
-                        items {
-                            ... on Entry {
-                                sys { id}
-                                __typename
-                            }
-                            ... on LayoutGrid {
-                                title
-
-                            }
-                        }
-                    }
-                    containerWidth
-                }
+                ...sectionHero
+                ...sectionGeneric
             }
         }
     }

@@ -23,7 +23,7 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: ["@/assets/fonts/fonts.css"],
+  css: ["@/assets/fonts/fonts.css", "@/assets/css/base.css"],
   app: {
     head: {
       title: "Shibulé",

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>LayoutGridWrapper</h2>
     <BaseGrid :columns="columns">
       <DynamicContentfulElements :sections="elements" :is-section="false" />
     </BaseGrid>

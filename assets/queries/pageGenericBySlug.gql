@@ -1,4 +1,5 @@
 query pageGenericBySlug($slug: String, $preview: Boolean, $locale: String = "en-US") {
+
     pageGenericCollection(where: { slug: $slug}, preview: $preview, locale: $locale) {
         items {
             sys {
@@ -7,12 +8,7 @@ query pageGenericBySlug($slug: String, $preview: Boolean, $locale: String = "en-
             title
             sectionsCollection {
                 items {
-                    ... on Entry {
-                        __typename
-                        sys {
-                            id
-                        }
-                    }
+                    ...genericEntry
                     ... on SectionGeneric {
                         background
                     }

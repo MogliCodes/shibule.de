@@ -1,0 +1,6 @@
+fragment genericEntry on Entry {
+    __typename
+    sys {
+        id
+    }
+}
