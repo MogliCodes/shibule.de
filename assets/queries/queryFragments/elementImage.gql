@@ -1,0 +1,10 @@
+fragment elementImage on ElementImage {
+    sys {
+        id
+    }
+    __typename
+    title
+    image {
+        url
+    }
+}

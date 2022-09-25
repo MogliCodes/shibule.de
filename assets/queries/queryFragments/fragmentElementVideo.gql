@@ -1,0 +1,8 @@
+fragment elementVideo on ElementVideo {
+    ...genericEntry
+    title
+    video {
+        url
+    }
+    videoSource
+}

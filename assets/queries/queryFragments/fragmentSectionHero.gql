@@ -1,0 +1,10 @@
+fragment sectionHero on SectionHero {
+    ...genericEntry
+    headline
+    text {json}
+    backgroundImage {
+        sys {
+            id
+        }
+    }
+}

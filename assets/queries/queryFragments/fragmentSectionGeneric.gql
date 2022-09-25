@@ -1,0 +1,16 @@
+fragment sectionGeneric on SectionGeneric {
+    __typename
+    title
+    contentCollection {
+        items {
+            ... on Entry {
+                sys { id}
+                __typename
+            }
+            ... on LayoutGrid {
+                title
+            }
+        }
+    }
+    containerWidth
+}

@@ -1,0 +1,10 @@
+fragment layoutGrid on LayoutGrid {
+    __typename
+    title
+    columns
+    elementsCollection {
+        items {
+            ...elementText
+        }
+    }
+}

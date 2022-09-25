@@ -35,6 +35,7 @@ type AssetCollection {
 
 type AssetLinkingCollections {
     elementImageCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ElementImageCollection
+    elementVideoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ElementVideoCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
     sectionHeroCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): SectionHeroCollection
 }
@@ -142,6 +143,27 @@ type ElementTextTextLinks {
     entries: ElementTextTextEntries!
 }
 
+"[See type definition](https://app.contentful.com/spaces/3kkzcrwm5yh9/content_types/elementVideo)"
+type ElementVideo implements Entry {
+    contentfulMetadata: ContentfulMetadata!
+    linkedFrom(allowedLocales: [String]): ElementVideoLinkingCollections
+    sys: Sys!
+    title(locale: String): String
+    video(locale: String, preview: Boolean): Asset
+    videoSource(locale: String): String
+}
+
+type ElementVideoCollection {
+    items: [ElementVideo]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type ElementVideoLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
 type EntryCollection {
     items: [Entry]!
     limit: Int!
@@ -214,6 +236,8 @@ type Query {
     elementImageCollection(limit: Int = 100, locale: String, order: [ElementImageOrder], preview: Boolean, skip: Int = 0, where: ElementImageFilter): ElementImageCollection
     elementText(id: String!, locale: String, preview: Boolean): ElementText
     elementTextCollection(limit: Int = 100, locale: String, order: [ElementTextOrder], preview: Boolean, skip: Int = 0, where: ElementTextFilter): ElementTextCollection
+    elementVideo(id: String!, locale: String, preview: Boolean): ElementVideo
+    elementVideoCollection(limit: Int = 100, locale: String, order: [ElementVideoOrder], preview: Boolean, skip: Int = 0, where: ElementVideoFilter): ElementVideoCollection
     entryCollection(limit: Int = 100, locale: String, order: [EntryOrder], preview: Boolean, skip: Int = 0, where: EntryFilter): EntryCollection
     layoutGrid(id: String!, locale: String, preview: Boolean): LayoutGrid
     layoutGridCollection(limit: Int = 100, locale: String, order: [LayoutGridOrder], preview: Boolean, skip: Int = 0, where: LayoutGridFilter): LayoutGridCollection
@@ -368,6 +392,21 @@ enum ElementTextOrder {
     sys_publishedVersion_DESC
     title_ASC
     title_DESC
+}
+
+enum ElementVideoOrder {
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
+    videoSource_ASC
+    videoSource_DESC
 }
 
 enum EntryOrder {
@@ -657,6 +696,28 @@ input ElementTextFilter {
     title_not: String
     title_not_contains: String
     title_not_in: [String]
+}
+
+input ElementVideoFilter {
+    AND: [ElementVideoFilter]
+    OR: [ElementVideoFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
+    videoSource: String
+    videoSource_contains: String
+    videoSource_exists: Boolean
+    videoSource_in: [String]
+    videoSource_not: String
+    videoSource_not_contains: String
+    videoSource_not_in: [String]
+    video_exists: Boolean
 }
 
 input EntryFilter {
