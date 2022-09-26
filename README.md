@@ -1,4 +1,8 @@
-# Nuxt 3 Minimal Starter
+# shibule.de
+
+This is the repository for [shibule.de](https://www.shibule.de)
+
+## Nuxt 3 Minimal Starter
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
