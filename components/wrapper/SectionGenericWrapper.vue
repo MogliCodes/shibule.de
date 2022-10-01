@@ -14,11 +14,12 @@ interface Props {
   entryId: string;
 }
 const props = defineProps<Props>();
+const config = useRuntimeConfig();
 
 const { data: sectionData } = await useAsyncGql({
   operation: "sectionGenericById",
-  variables: { id: props.entryId },
+  variables: { id: props.entryId, preview: config.public.contentful.preview },
 });
 
-const sections = sectionData.value.sectionGeneric.contentCollection.items;
+const sections = sectionData?.value?.sectionGeneric?.contentCollection?.items;
 </script>

@@ -9,6 +9,8 @@ interface Entry {
     sys: Sys!
 }
 
+union ContentProjectSectionsItem = LayoutGrid | SectionGeneric | SectionHero
+
 union PageGenericSectionsItem = SectionGeneric | SectionHero
 
 "Represents a binary file in a space. An asset can be any file type."
@@ -38,6 +40,57 @@ type AssetLinkingCollections {
     elementVideoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ElementVideoCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
     sectionHeroCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): SectionHeroCollection
+}
+
+"[See type definition](https://app.contentful.com/spaces/3kkzcrwm5yh9/content_types/contentProject)"
+type ContentProject implements Entry {
+    contentfulMetadata: ContentfulMetadata!
+    creator(locale: String): String
+    description(locale: String): ContentProjectDescription
+    linkedFrom(allowedLocales: [String]): ContentProjectLinkingCollections
+    sectionsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ContentProjectSectionsCollection
+    slug(locale: String): String
+    sys: Sys!
+    title(locale: String): String
+}
+
+type ContentProjectCollection {
+    items: [ContentProject]!
+    limit: Int!
+    skip: Int!
+    total: Int!
+}
+
+type ContentProjectDescription {
+    json: JSON!
+    links: ContentProjectDescriptionLinks!
+}
+
+type ContentProjectDescriptionAssets {
+    block: [Asset]!
+    hyperlink: [Asset]!
+}
+
+type ContentProjectDescriptionEntries {
+    block: [Entry]!
+    hyperlink: [Entry]!
+    inline: [Entry]!
+}
+
+type ContentProjectDescriptionLinks {
+    assets: ContentProjectDescriptionAssets!
+    entries: ContentProjectDescriptionEntries!
+}
+
+type ContentProjectLinkingCollections {
+    entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+type ContentProjectSectionsCollection {
+    items: [ContentProjectSectionsItem]!
+    limit: Int!
+    skip: Int!
+    total: Int!
 }
 
 type ContentfulMetadata {
@@ -196,6 +249,7 @@ type LayoutGridElementsCollection {
 }
 
 type LayoutGridLinkingCollections {
+    contentProjectCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ContentProjectCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
 }
 
@@ -230,6 +284,8 @@ type PageGenericSectionsCollection {
 type Query {
     asset(id: String!, locale: String, preview: Boolean): Asset
     assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
+    contentProject(id: String!, locale: String, preview: Boolean): ContentProject
+    contentProjectCollection(limit: Int = 100, locale: String, order: [ContentProjectOrder], preview: Boolean, skip: Int = 0, where: ContentProjectFilter): ContentProjectCollection
     elementColumn(id: String!, locale: String, preview: Boolean): ElementColumn
     elementColumnCollection(limit: Int = 100, locale: String, order: [ElementColumnOrder], preview: Boolean, skip: Int = 0, where: ElementColumnFilter): ElementColumnCollection
     elementImage(id: String!, locale: String, preview: Boolean): ElementImage
@@ -275,6 +331,7 @@ type SectionGenericContentCollection {
 }
 
 type SectionGenericLinkingCollections {
+    contentProjectCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ContentProjectCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
     pageGenericCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageGenericCollection
 }
@@ -298,6 +355,7 @@ type SectionHeroCollection {
 }
 
 type SectionHeroLinkingCollections {
+    contentProjectCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ContentProjectCollection
     entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
     pageGenericCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageGenericCollection
 }
@@ -353,6 +411,23 @@ enum AssetOrder {
     url_DESC
     width_ASC
     width_DESC
+}
+
+enum ContentProjectOrder {
+    creator_ASC
+    creator_DESC
+    slug_ASC
+    slug_DESC
+    sys_firstPublishedAt_ASC
+    sys_firstPublishedAt_DESC
+    sys_id_ASC
+    sys_id_DESC
+    sys_publishedAt_ASC
+    sys_publishedAt_DESC
+    sys_publishedVersion_ASC
+    sys_publishedVersion_DESC
+    title_ASC
+    title_DESC
 }
 
 enum ElementColumnOrder {
@@ -638,6 +713,38 @@ input AssetFilter {
     width_lte: Int
     width_not: Int
     width_not_in: [Int]
+}
+
+input ContentProjectFilter {
+    AND: [ContentProjectFilter]
+    OR: [ContentProjectFilter]
+    contentfulMetadata: ContentfulMetadataFilter
+    creator: String
+    creator_contains: String
+    creator_exists: Boolean
+    creator_in: [String]
+    creator_not: String
+    creator_not_contains: String
+    creator_not_in: [String]
+    description_contains: String
+    description_exists: Boolean
+    description_not_contains: String
+    sectionsCollection_exists: Boolean
+    slug: String
+    slug_contains: String
+    slug_exists: Boolean
+    slug_in: [String]
+    slug_not: String
+    slug_not_contains: String
+    slug_not_in: [String]
+    sys: SysFilter
+    title: String
+    title_contains: String
+    title_exists: Boolean
+    title_in: [String]
+    title_not: String
+    title_not_contains: String
+    title_not_in: [String]
 }
 
 input ContentfulMetadataFilter {

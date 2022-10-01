@@ -1,30 +1,31 @@
 <template>
-  <div>
+  <component
+    :is="sectionTag"
+    v-for="(section, index) in sections"
+    :key="index"
+    :class="[backgroundColor(section), padding(section)]"
+  >
     <component
-      :is="sectionTag"
-      v-for="(section, index) in sections"
-      :key="index"
-      :class="[backgroundColor(section), padding(section)]"
+      v-bind="getComponentPropsWithHandledDefaults(section)"
+      :is="resolveComponentByTypename(section)"
+      :entry-id="section?.sys?.id"
+      :is-on-detail-page="props.isOnDetailPage"
     >
-      <component
-        v-bind="getComponentPropsWithHandledDefaults(section)"
-        :is="resolveComponentByTypename(section)"
-        :entry-id="section?.sys?.id"
-      >
-      </component>
     </component>
-  </div>
+  </component>
 </template>
 
 <script setup lang="ts">
 interface Props {
   sections?: [];
   isSection?: boolean;
+  isOnDetailPage?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isSection: true,
   sections: null,
+  isOnDetailPage: false,
 });
 
 function resolveComponentByTypename(component) {
@@ -57,8 +58,8 @@ function getComponentPropsWithHandledDefaults(component) {
 }
 
 function backgroundColor(component) {
-  if (component.background) {
-    return component.background === "light-gray" ? "bg-gray-100" : "";
+  if (component?.background) {
+    return component?.background === "light-gray" ? "bg-gray-100" : "";
   }
 }
 

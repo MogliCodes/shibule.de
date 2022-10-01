@@ -1,5 +1,5 @@
-query layoutGridById($id: String!) {
-    layoutGrid(id: $id) {
+query layoutGridById($id: String!, $preview: Boolean) {
+    layoutGrid(id: $id, preview: $preview) {
         title
         columns
         elementsCollection {

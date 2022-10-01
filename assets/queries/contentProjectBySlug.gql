@@ -1,0 +1,18 @@
+query contentProjectBySlug($slug: String, $preview: Boolean, $locale: String = "en-US") {
+    contentProjectCollection(where: { slug: $slug}, preview: $preview, locale: $locale) {
+        items {
+            sys {
+                id
+            }
+            title
+            sectionsCollection(limit: 10) {
+                items {
+                    ...genericEntry
+                    ... on SectionGeneric {
+                        background
+                    }
+                }
+            }
+        }
+    }
+}

@@ -10,10 +10,11 @@
 const route = useRoute();
 const slug = route.path;
 const slugFormatted = slug.substring(1) || "home";
+const config = useRuntimeConfig();
 
 const { data: pageData } = await useAsyncGql({
   operation: "pageGenericBySlug",
-  variables: { slug: slugFormatted, preview: false },
+  variables: { slug: slugFormatted, preview: config.public.contentful.preview },
 });
 
 const sections =

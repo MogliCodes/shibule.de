@@ -11,3 +11,13 @@ interface Props {
 
 const props = defineProps<Props>();
 </script>
+
+<style>
+ul li {
+  list-style-type: disc;
+}
+ul li li {
+  list-style-type: circle;
+  margin-left: 20px;
+}
+</style>

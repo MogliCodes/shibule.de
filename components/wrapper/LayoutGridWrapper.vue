@@ -17,11 +17,13 @@ const props = withDefaults(defineProps<Props>(), {
   entryId: null,
 });
 
+const config = useRuntimeConfig();
+
 const { data: gridData } = await useAsyncGql({
   operation: "layoutGridById",
-  variables: { id: props.entryId },
+  variables: { id: props.entryId, preview: config.public.contentful.preview },
 });
 
-const elements = gridData.value.layoutGrid.elementsCollection.items;
-const columns = gridData.value.layoutGrid.columns;
+const elements = gridData?.value?.layoutGrid?.elementsCollection.items;
+const columns = gridData?.value?.layoutGrid?.columns;
 </script>

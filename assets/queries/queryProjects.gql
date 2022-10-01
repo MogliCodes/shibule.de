@@ -1,0 +1,12 @@
+query queryProjects($preview: Boolean) {
+    contentProjectCollection(preview: $preview) {
+        items {
+            slug
+            title
+            description {
+                json
+            }
+            creator
+        }
+    }
+}
