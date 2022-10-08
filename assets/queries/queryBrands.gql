@@ -1,0 +1,7 @@
+query queryBrands($preview: Boolean) {
+    contentBrandCollection(preview: $preview) {
+       items {
+           title
+       }
+    }
+}

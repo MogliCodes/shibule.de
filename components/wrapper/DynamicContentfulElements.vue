@@ -8,6 +8,7 @@
     <component
       v-bind="getComponentPropsWithHandledDefaults(section)"
       :is="resolveComponentByTypename(section)"
+      class="last:pb-16"
       :entry-id="section?.sys?.id"
       :is-on-detail-page="props.isOnDetailPage"
     >

@@ -25,6 +25,10 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <style>
+.container-base {
+  padding: 0 24px;
+}
+
 .container-standard {
   max-width: 1200px;
 }

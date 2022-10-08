@@ -4,7 +4,12 @@ export default defineNuxtConfig({
     base: "/home",
   },
   target: "static",
-  modules: ["nuxt-graphql-client", "@nuxtjs/tailwindcss", "@vueuse/nuxt"],
+  modules: [
+    "nuxt-graphql-client",
+    "@nuxtjs/tailwindcss",
+    "@vueuse/nuxt",
+    "@nuxtjs/color-mode",
+  ],
   build: {
     transpile:
       process.env.SSR_MODE === "true" ? ["@contentful/rich-text-types"] : null,
