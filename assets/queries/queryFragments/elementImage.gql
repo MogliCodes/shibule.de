@@ -7,4 +7,5 @@ fragment elementImage on ElementImage {
     image {
         url
     }
+    shadow
 }

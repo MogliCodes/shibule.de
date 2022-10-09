@@ -45,6 +45,8 @@ function resolveComponentByTypename(component) {
       return resolveComponent("WrapperElementImageWrapper");
     case "ElementVideo":
       return resolveComponent("WrapperElementVideoWrapper");
+    case "ElementCard":
+      return resolveComponent("WrapperElementCardWrapper");
   }
 }
 

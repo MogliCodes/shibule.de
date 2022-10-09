@@ -5,6 +5,7 @@ query layoutGridById($id: String!, $preview: Boolean) {
         elementsCollection {
             items {
                 __typename
+
                 ... on ElementColumn {
                     elementsCollection {
                         items {
@@ -23,6 +24,7 @@ query layoutGridById($id: String!, $preview: Boolean) {
                     }
                 }
                 ...elementImage
+                ...elementCard
             }
         }
     }

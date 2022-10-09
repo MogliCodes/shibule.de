@@ -1,0 +1,12 @@
+fragment elementCard on ElementCard {
+    sys {
+        id
+    }
+    title
+    icon {
+        url
+    }
+    text {
+        json
+    }
+}

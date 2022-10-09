@@ -11,6 +11,7 @@ query sectionGenericById ($id: String!, $preview: Boolean, $locale: String = "en
                 ...elementImage
                 ...layoutGrid
                 ...elementVideo
+                ...elementCard
             }
         }
     }

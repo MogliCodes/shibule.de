@@ -21,6 +21,7 @@
         :document="heroData.text"
       />
     </BaseContainer>
+    <div class="arrow" @click="scrollToNextSection()"></div>
   </div>
 </template>
 
@@ -41,6 +42,10 @@ const { data: sectionData } = await useAsyncGql({
 });
 
 const heroData = sectionData?.value?.sectionHero;
+
+function scrollToNextSection() {
+  window.scrollTo({ top: window.innerHeight, left: 0, behavior: "smooth" });
+}
 </script>
 
 <style>
@@ -48,5 +53,15 @@ const heroData = sectionData?.value?.sectionHero;
   position: fixed;
   z-index: -1;
   opacity: 0.1;
+}
+
+.arrow {
+  background: #333;
+  cursor: pointer;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  bottom: 2rem;
+  left: calc(50% - 10px);
 }
 </style>
