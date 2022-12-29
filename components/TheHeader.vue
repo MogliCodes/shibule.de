@@ -7,7 +7,7 @@
         <NuxtLink to="/">
           <img class="w-20 mx-auto" src="~/public/img/shibule_logo_white.svg" />
         </NuxtLink>
-        <NuxtLink active-class="font-bold">Brands</NuxtLink>
+        <NuxtLink active-class="font-bold" to="/brands">Brands</NuxtLink>
         <NuxtLink active-class="font-bold">Mottenkiste</NuxtLink>
       </div>
     </BaseContainer>

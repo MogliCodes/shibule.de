@@ -12,7 +12,7 @@
 <script setup lang="ts">
 const route = useRoute();
 const slug = route.path;
-const slugFormatted = slug.replace(/^(?:[^\/]*\/){2}\s*/, "");
+const slugFormatted = slug.replace(/^(?:[^/]*\/){2}\s*/, "");
 const config = useRuntimeConfig();
 
 console.log("slug", slugFormatted);

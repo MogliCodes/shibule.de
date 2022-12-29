@@ -5,7 +5,6 @@
     "node": true
   },
   "extends": [
-    "@nuxtjs/eslint-config-typescript",
     "plugin:vue/vue3-strongly-recommended",
     "eslint:recommended",
     "@vue/typescript/recommended",
@@ -15,7 +14,7 @@
   "rules": {
     "no-undef": "off",
     "vue/multi-word-component-names": ["error", {
-      "ignores": ["default", "index", "[...slug]"]
+      "ignores": ["default", "index", "about", "[...slug]"]
     }],
     "vue/script-setup-no-uses-vars": "off",
     "@typescript-eslint/no-explicit-any": "off",
